@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+
+# Get the location of the "src" directory
+
+source="${BASH_SOURCE}"
+
+while [ -h "$source" ]; do
+    source="$(readlink $source)"
+done
+
+src="$(dirname $source)/src/."
+
+
+# Utility functions
+
+status () {
+    echo "web-template: $1"
+}
+
+
+# Set the destination directory
+
+dest="."
+
+if [ "$#" != "0" ]; then
+    dest="$1"
+fi
+
+
+# Create destination directory if needed
+
+if [ ! -d "$dest" ]; then
+    mkdir -p "$1"
+fi
+
+
+# Copy files
+
+status "copying files..."
+cp -r "$src" "$dest" && status "thunderbirds are go!"
