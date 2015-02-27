@@ -19,21 +19,21 @@ web-template [path]
 
 ## Overview
 
-    init
-    LICENSE
-    README.md
     src
     ├── css
     │   ├── main.css
     │   ├── normalize-3.0.2.min.css
     │   └── print.css
     ├── img
-    ├── index.html
     ├── js
     │   ├── lib
     │   │   └── jquery-2.1.3.min.js
     │   └── main.js
+    ├── index.html
     └── robots.txt
+    init
+    LICENSE
+    README.md
 
 ## License
 
