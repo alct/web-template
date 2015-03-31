@@ -22,7 +22,7 @@ web-template [path]
     src
     ├── css
     │   ├── main.css
-    │   ├── normalize-3.0.2.min.css
+    │   ├── normalize-3.0.3.min.css
     │   └── print.css
     ├── img
     ├── js
