@@ -53,4 +53,4 @@ fi
 # Copy files
 
 status "copying files..."
-cp -r "$src" "$dest" && status "thunderbirds are go!"
+cp -i -r "$src" "$dest" && status "thunderbirds are go!"
