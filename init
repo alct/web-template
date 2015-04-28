@@ -28,6 +28,20 @@ if [ "$#" != "0" ]; then
 fi
 
 
+# If the destination is the current directory, make sure it is intentional
+
+if [ "$dest" == "." ]; then
+    read -p "web-template: copy files in the current directory? [y/N] " -n 1 -r
+
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        status "aborting"
+        exit 1
+    else
+        echo
+    fi
+fi
+
+
 # Create destination directory if needed
 
 if [ ! -d "$dest" ]; then
