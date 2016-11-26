@@ -26,7 +26,7 @@ web-template [path]
     ├── img
     ├── js
     │   ├── lib
-    │   │   └── jquery-2.2.4.min.js
+    │   │   └── jquery-3.1.1.min.js
     │   └── main.js
     ├── index.html
     └── robots.txt
