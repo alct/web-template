@@ -1,56 +1,58 @@
 #!/usr/bin/env bash
 
+# get the absolute path of the script
+script_source_path() {
+  local source="${BASH_SOURCE[0]}"
 
-# Get the location of the "src" directory
+  while [[ -h "${source}" ]]; do
+    source="$(readlink "${source}")"
+  done
 
-source="${BASH_SOURCE}"
-
-while [ -h "$source" ]; do
-    source="$(readlink $source)"
-done
-
-src="$(dirname $source)/src/."
-
-
-# Utility functions
-
-status () {
-    echo "web-template: $1"
+  dirname "${source}" || exit 1
 }
 
+# named echo wrapper
+status () {
+  echo "web-template: ${1}"
+}
 
-# Set the destination directory
+main() {
+  local src_dir
+  local dst_dir
 
-dest="."
+  src_dir="$(script_source_path)/src/"
 
-if [ "$#" != "0" ]; then
-    dest="$1"
-fi
+  # if no dst_dir is provided, default to current directory
+  dst_dir="${1:-.}"
 
+  # if dst_dir is the current directory, ask for confirmation
+  if [[ "${dst_dir}" == "." ]]; then
+      read -p "web-template: copy files in the current directory? [y/N] " -n 1 -r
 
-# If the destination is the current directory, make sure it is intentional
+      if [[ ! "${REPLY}" =~ ^[Yy]$ ]]; then
+          echo
+          status "aborting"
+          exit 1
+      else
+          echo
+      fi
+  fi
 
-if [ "$dest" == "." ]; then
-    read -p "web-template: copy files in the current directory? [y/N] " -n 1 -r
+  # create destination directory if it does not exist
+  if [[ ! -d "${dst_dir}" ]]; then
+      status "creating destination directory"
+      mkdir --parents "${dst_dir}"
+  fi
 
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        status "aborting"
-        exit 1
-    else
-        echo
-    fi
-fi
+  # copy files
+  status "copying files"
 
+  if ! cp --interactive --preserve=mode,ownership,timestamps --recursive "${src_dir}." "${dst_dir}"; then
+    status "an error occured while copying files"
+    exit 1
+  fi
 
-# Create destination directory if needed
+  status "thunderbirds are go!"
+}
 
-if [ ! -d "$dest" ]; then
-    status "creating directory..."
-    mkdir -p "$1"
-fi
-
-
-# Copy files
-
-status "copying files..."
-cp -i -p -r "$src" "$dest" && status "thunderbirds are go!"
+main "$@"
