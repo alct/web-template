@@ -6,15 +6,15 @@ Lightweight website template. It creates few directories, files and local copy o
 
 ```bash
 cd && git clone https://github.com/alct/web-template.git
-sudo ln -s ~/web-template/init /usr/local/bin/web-template
+sudo ln --symbolic ~/web-template/web-template.sh /usr/local/bin/web-template
 ```
 
 ## Utilisation
 
-If `path` is empty, files will be copied in the current directory.
+If `path/to/target/dir` is empty, files will be copied in the current directory.
 
 ```bash
-web-template [path]
+web-template [path/to/target/dir]
 ```
 
 ## Overview
@@ -29,7 +29,7 @@ web-template [path]
     │   └── main.js
     ├── index.html
     └── robots.txt
-    init
+    web-template.sh
     LICENSE
     README.md
 
