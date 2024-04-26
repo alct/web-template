@@ -1,6 +1,6 @@
 # Website template
 
-Lightweight website template. It creates few directories, files and local copies of jQuery (latest, minified) and normalize.css (latest, minified).
+Lightweight website template. It creates few directories, files and local copy of normalize.css (latest, minified).
 
 ## Installation
 
@@ -26,7 +26,6 @@ web-template [path]
     ├── img
     ├── js
     │   ├── lib
-    │   │   └── jquery-3.2.1.min.js
     │   └── main.js
     ├── index.html
     └── robots.txt
